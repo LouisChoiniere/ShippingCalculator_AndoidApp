@@ -2,16 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@+id/navigation_home"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="@string/title_home" />
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_baseline_calculate_24"
+        android:title="@string/title_home" />
 
     <item
-            android:id="@+id/navigation_address"
-            android:title="@string/title_address" />
+        android:id="@+id/navigation_address"
+        android:icon="@drawable/ic_baseline_location_on_24"
+        android:title="@string/title_address" />
 
     <item
-            android:id="@+id/navigation_box"
-            android:title="@string/title_box" />
+        android:id="@+id/navigation_box"
+        android:icon="@drawable/ic_baseline_dashboard_24"
+        android:title="@string/title_box" />
 
 </menu>

@@ -13,13 +13,13 @@
 
     <fragment
             android:id="@+id/navigation_address"
-            android:name="com.louis.shippingcalculator.ui.dashboard.DashboardFragment"
+            android:name="com.louis.shippingcalculator.ui.address.AddressFragment"
             android:label="@string/title_address"
-            tools:layout="@layout/fragment_dashboard" />
+            tools:layout="@layout/fragment_address" />
 
     <fragment
             android:id="@+id/navigation_box"
-            android:name="com.louis.shippingcalculator.ui.notifications.NotificationsFragment"
+            android:name="com.louis.shippingcalculator.ui.box.BoxFragment"
             android:label="@string/title_box"
-            tools:layout="@layout/fragment_notifications" />
+            tools:layout="@layout/fragment_Box" />
 </navigation>

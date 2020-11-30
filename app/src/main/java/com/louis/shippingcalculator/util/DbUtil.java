@@ -9,6 +9,7 @@ public class DbUtil {
         public static final String TABLE_NAME = "address";
 
         public static final String KEY_ID = "id";
+        public static final String KEY_NAME = "name";
         public static final String KEY_ADDRESS = "address";
         public static final String KEY_CITY = "city";
         public static final String KEY_PROV = "province";
@@ -20,6 +21,7 @@ public class DbUtil {
         public static final String TABLE_NAME = "box";
 
         public static final String KEY_ID = "id";
+        public static final String KEY_NAME = "name";
         public static final String KEY_WIDTH = "width";
         public static final String KEY_HEIGHT = "height";
         public static final String KEY_DEPTH = "depth";

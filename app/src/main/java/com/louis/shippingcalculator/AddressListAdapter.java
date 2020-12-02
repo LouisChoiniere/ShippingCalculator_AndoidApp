@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.louis.shippingcalculator.controller.AddressBookController;
 import com.louis.shippingcalculator.model.Address;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: " + addressList.get(position).toString());
+                AddressBookController.showInfo(context, addressList.get(position));
             }
         });
     }

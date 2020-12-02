@@ -1,6 +1,7 @@
 package com.louis.shippingcalculator.ui.box;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,8 @@ import java.util.List;
 
 public class BoxFragment extends Fragment {
 
+    public static final String TAG = "BoxFragment";
+
     BoxDA db;
 
     private List<Box> boxList;
@@ -48,6 +51,14 @@ public class BoxFragment extends Fragment {
         BoxListAdapter adapter = new BoxListAdapter(this.getContext(), boxList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+        // Setup new Box
+        view.findViewById(R.id.newBox).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: New Box");
+            }
+        });
 
         return view;
     }

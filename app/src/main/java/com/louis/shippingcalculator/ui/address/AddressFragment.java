@@ -1,6 +1,7 @@
 package com.louis.shippingcalculator.ui.address;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.louis.shippingcalculator.AddressListAdapter;
@@ -21,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddressFragment extends Fragment {
+
+    public static final String TAG = "AddressFragment";
 
     AddressDA db;
 
@@ -47,6 +51,14 @@ public class AddressFragment extends Fragment {
         AddressListAdapter adapter = new AddressListAdapter(this.getContext(), addressList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+        // Setup new Box
+        view.findViewById(R.id.newAddress).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: New Address");
+            }
+        });
 
         return view;
     }

@@ -1,5 +1,6 @@
 package com.louis.shippingcalculator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -12,6 +13,7 @@ import com.louis.shippingcalculator.data.DatabaseHandler;
 import com.louis.shippingcalculator.model.Address;
 import com.louis.shippingcalculator.model.Box;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -63,5 +65,12 @@ public class MainActivity extends AppCompatActivity {
 //            Log.d(TAG, address.toString());
 //        }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
+        BoxController.activityResult(this, requestCode, resultCode, intent);
+        AddressController.activityResult(this, requestCode, resultCode, intent);
+        super.onActivityResult(requestCode, resultCode, intent);
     }
 }

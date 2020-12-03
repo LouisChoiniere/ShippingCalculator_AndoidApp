@@ -5,33 +5,33 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.louis.shippingcalculator.ui.address.AddAddress;
 import com.louis.shippingcalculator.ui.address.InfoAddress;
 import com.louis.shippingcalculator.data.AddressDA;
 import com.louis.shippingcalculator.model.Address;
 
 public class AddressController {
+    public static final int REQUEST_CODE_ADD = 21;
 
     public static final String INTENT_ADDRESS = "Addr";
 
+
+    // Launch activity to show the info about the address
     public static void showInfo(Context context, Address address) {
         Intent intent = new Intent(context, InfoAddress.class);
         intent.putExtra(INTENT_ADDRESS, new Gson().toJson(address));
         context.startActivity(intent);
     }
 
-    public static void launchAdd(Context context) {
-
+    // Launch add activity for result
+    public static void add(Context context) {
+        Intent intent = new Intent(context, AddAddress.class);
+        ((Activity) context).startActivityForResult(intent, REQUEST_CODE_ADD);
     }
 
-    public static void add(Context context, Address address) {
-        AddressDA addressDA = new AddressDA(context);
-
-        addressDA.add(address);
-    }
-
+    // Show prompt and delete address
     public static void delete(Context context, Address address) {
         new AlertDialog.Builder(context)
                 .setTitle("Delete")
@@ -55,5 +55,16 @@ public class AddressController {
 
         // ToDo implement edit address
 //        addressDA.editAddress(address);
+    }
+
+
+    // result of start activity for result
+    public static void activityResult(Context context, int requestCode, int resultCode, Intent intent) {
+
+        switch (requestCode) {
+            case REQUEST_CODE_ADD:
+                new AddressDA(context).add(new Gson().fromJson(String.valueOf(intent.getStringExtra(BoxController.INTENT_BOX)), Address.class));
+                break;
+        }
     }
 }

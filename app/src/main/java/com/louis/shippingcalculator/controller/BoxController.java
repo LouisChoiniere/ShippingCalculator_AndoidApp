@@ -7,31 +7,31 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import com.google.gson.Gson;
-import com.louis.shippingcalculator.data.AddressDA;
+import com.louis.shippingcalculator.ui.box.AddBox;
 import com.louis.shippingcalculator.data.BoxDA;
 import com.louis.shippingcalculator.model.Box;
 import com.louis.shippingcalculator.ui.box.InfoBox;
 
 public class BoxController {
+    public static final int REQUEST_CODE_ADD = 11;
 
     public static final String INTENT_BOX = "Box";
 
+
+    // Launch activity to show the info about the box
     public static void showInfo(Context context, Box box) {
         Intent intent = new Intent(context, InfoBox.class);
         intent.putExtra(INTENT_BOX, new Gson().toJson(box));
         context.startActivity(intent);
     }
 
-    public static void launchAdd(Context context) {
-
+    // Launch add activity for result
+    public static void add(Context context) {
+        Intent intent = new Intent(context, AddBox.class);
+        ((Activity) context).startActivityForResult(intent, REQUEST_CODE_ADD);
     }
 
-    public static void add(Context context, Box box) {
-        BoxDA boxDA = new BoxDA(context);
-
-        boxDA.add(box);
-    }
-
+    // Show prompt and delete box
     public static void delete(Context context, Box box) {
         new AlertDialog.Builder(context)
                 .setTitle("Delete")
@@ -56,5 +56,15 @@ public class BoxController {
 
         // ToDo implement edit box
 //        boxDA.editBox(box);
+    }
+
+    // result of start activity for result
+    public static void activityResult(Context context, int requestCode, int resultCode, Intent intent) {
+
+        switch (requestCode) {
+            case REQUEST_CODE_ADD:
+                new BoxDA(context).add(new Gson().fromJson(String.valueOf(intent.getStringExtra(BoxController.INTENT_BOX)), Box.class));
+                break;
+        }
     }
 }

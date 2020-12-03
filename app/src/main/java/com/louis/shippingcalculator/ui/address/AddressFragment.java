@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.louis.shippingcalculator.R;
+import com.louis.shippingcalculator.controller.AddressController;
 import com.louis.shippingcalculator.data.AddressDA;
 import com.louis.shippingcalculator.model.Address;
 
@@ -52,6 +53,7 @@ public class AddressFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: New Address");
+                AddressController.add(getContext());
             }
         });
 

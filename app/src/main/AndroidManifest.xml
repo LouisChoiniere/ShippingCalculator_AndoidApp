@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShippingCalculator">
-        <activity android:name=".InfoAddress"></activity>
+        <activity android:name=".AddBox"></activity>
+        <activity android:name=".ui.box.InfoBox" />
+        <activity android:name=".ui.address.InfoAddress" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

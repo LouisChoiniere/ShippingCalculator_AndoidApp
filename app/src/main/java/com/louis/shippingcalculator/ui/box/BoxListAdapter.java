@@ -1,4 +1,4 @@
-package com.louis.shippingcalculator;
+package com.louis.shippingcalculator.ui.box;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,7 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.louis.shippingcalculator.model.Address;
+import com.louis.shippingcalculator.R;
+import com.louis.shippingcalculator.controller.BoxController;
 import com.louis.shippingcalculator.model.Box;
 
 import java.util.List;
@@ -48,6 +49,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: " + boxList.get(position).toString());
+                BoxController.showInfo(context, boxList.get(position));
             }
         });
     }

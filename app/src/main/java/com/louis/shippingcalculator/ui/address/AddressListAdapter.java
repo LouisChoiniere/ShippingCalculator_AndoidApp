@@ -1,4 +1,4 @@
-package com.louis.shippingcalculator;
+package com.louis.shippingcalculator.ui.address;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,10 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.louis.shippingcalculator.controller.AddressBookController;
+import com.louis.shippingcalculator.R;
+import com.louis.shippingcalculator.controller.AddressController;
 import com.louis.shippingcalculator.model.Address;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.ViewHolder> {
@@ -48,7 +48,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: " + addressList.get(position).toString());
-                AddressBookController.showInfo(context, addressList.get(position));
+                AddressController.showInfo(context, addressList.get(position));
             }
         });
     }

@@ -99,4 +99,21 @@ public class AddressDA extends DatabaseHandler {
 
         db.close();
     }
+
+    public void updateAddress(Address address) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(DbUtil.Address.KEY_NAME, address.getName());
+        values.put(DbUtil.Address.KEY_ADDRESS, address.getAddress());
+        values.put(DbUtil.Address.KEY_CITY, address.getCity());
+        values.put(DbUtil.Address.KEY_PROV, address.getProvince());
+        values.put(DbUtil.Address.KEY_POSTALCODE, address.getPostalCode());
+        values.put(DbUtil.Address.KEY_COUNTRY, address.getCountry());
+
+        db.update(DbUtil.Address.TABLE_NAME, values,
+                DbUtil.Address.KEY_ID + "=?", new String[]{String.valueOf(address.getId())});
+
+        db.close();
+    }
 }

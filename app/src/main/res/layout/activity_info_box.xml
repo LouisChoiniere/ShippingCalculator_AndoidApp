@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.address.InfoAddress">
+    tools:context=".ui.box.InfoBox">
 
     <TextView
         android:id="@+id/name"
@@ -14,42 +14,34 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingBottom="10dp"
-        android:text="John Doe"
+        android:text="AA11"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/address"
+        android:id="@+id/width"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingBottom="10dp"
-        android:text="123 Main St"
+        android:text="10 cm"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/city"
+        android:id="@+id/height"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingBottom="10dp"
-        android:text="Anytown"
+        android:text="10 cm"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/province"
+        android:id="@+id/depth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingBottom="10dp"
-        android:text="QC"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/postalCode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="A1A 1A1"
+        android:text="10 cm"
         android:textSize="18sp" />
 
     <LinearLayout

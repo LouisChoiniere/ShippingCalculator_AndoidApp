@@ -11,15 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.louis.shippingcalculator.AddressListAdapter;
 import com.louis.shippingcalculator.R;
 import com.louis.shippingcalculator.data.AddressDA;
 import com.louis.shippingcalculator.model.Address;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddressFragment extends Fragment {

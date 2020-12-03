@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
 
+import com.louis.shippingcalculator.model.Address;
 import com.louis.shippingcalculator.model.Box;
 import com.louis.shippingcalculator.util.DbUtil;
 
@@ -90,6 +91,21 @@ public class BoxDA extends DatabaseHandler {
 
         db.delete(DbUtil.Box.TABLE_NAME, DbUtil.Box.KEY_ID + "=?",
                 new String[]{Integer.toString(id)});
+
+        db.close();
+    }
+
+    public void updateBox(Box box) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(DbUtil.Box.KEY_NAME, box.getName());
+        values.put(DbUtil.Box.KEY_WIDTH, box.getWidth());
+        values.put(DbUtil.Box.KEY_HEIGHT, box.getHeight());
+        values.put(DbUtil.Box.KEY_DEPTH, box.getDepth());
+
+        db.update(DbUtil.Box.TABLE_NAME, values,
+                DbUtil.Box.KEY_ID + "=?", new String[]{String.valueOf(box.getId())});
 
         db.close();
     }

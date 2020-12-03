@@ -1,7 +1,9 @@
 package com.louis.shippingcalculator.ui.address;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -34,12 +36,7 @@ public class InfoAddress extends AppCompatActivity {
         provinceTV = findViewById(R.id.province);
         postalCode = findViewById(R.id.postalCode);
 
-        nameTV.setText(address.getName());
-        addressTV.setText(address.getAddress());
-        cityTV.setText(address.getCity());
-        provinceTV.setText(address.getProvince());
-        postalCode.setText(address.getPostalCode());
-
+        updateText();
 
         findViewById(R.id.deleteBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,8 +48,27 @@ public class InfoAddress extends AppCompatActivity {
         findViewById(R.id.editBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddressController.launchEdit(InfoAddress.this, address);
+                AddressController.edit(InfoAddress.this, address);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
+        if (requestCode == AddressController.REQUEST_CODE_EDIT) {
+            address = new Gson().fromJson(String.valueOf(intent.getStringExtra(AddressController.INTENT_ADDRESS)), Address.class);
+            updateText();
+        }
+
+        AddressController.activityResult(this, requestCode, resultCode, intent);
+        super.onActivityResult(requestCode, resultCode, intent);
+    }
+
+    private void updateText() {
+        nameTV.setText(address.getName());
+        addressTV.setText(address.getAddress());
+        cityTV.setText(address.getCity());
+        provinceTV.setText(address.getProvince());
+        postalCode.setText(address.getPostalCode());
     }
 }

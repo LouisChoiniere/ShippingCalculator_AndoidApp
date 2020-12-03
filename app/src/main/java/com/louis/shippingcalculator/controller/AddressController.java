@@ -7,13 +7,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import com.google.gson.Gson;
-import com.louis.shippingcalculator.ui.address.AddAddress;
+import com.louis.shippingcalculator.ui.address.AddressForm;
 import com.louis.shippingcalculator.ui.address.InfoAddress;
 import com.louis.shippingcalculator.data.AddressDA;
 import com.louis.shippingcalculator.model.Address;
 
 public class AddressController {
+    public static final String REQUEST_CODE = "requestCode";
     public static final int REQUEST_CODE_ADD = 21;
+    public static final int REQUEST_CODE_EDIT = 22;
 
     public static final String INTENT_ADDRESS = "Addr";
 
@@ -27,7 +29,8 @@ public class AddressController {
 
     // Launch add activity for result
     public static void add(Context context) {
-        Intent intent = new Intent(context, AddAddress.class);
+        Intent intent = new Intent(context, AddressForm.class);
+        intent.putExtra(REQUEST_CODE, String.valueOf(REQUEST_CODE_ADD));
         ((Activity) context).startActivityForResult(intent, REQUEST_CODE_ADD);
     }
 
@@ -46,15 +49,11 @@ public class AddressController {
                 .setNegativeButton(android.R.string.no, null).show();
     }
 
-    public static void launchEdit(Context context, Address address) {
-
-    }
-
     public static void edit(Context context, Address address) {
-        AddressDA addressDA = new AddressDA(context);
-
-        // ToDo implement edit address
-//        addressDA.editAddress(address);
+        Intent intent = new Intent(context, AddressForm.class);
+        intent.putExtra(REQUEST_CODE, String.valueOf(REQUEST_CODE_EDIT));
+        intent.putExtra(INTENT_ADDRESS, new Gson().toJson(address));
+        ((Activity) context).startActivityForResult(intent, REQUEST_CODE_EDIT);
     }
 
 
@@ -63,7 +62,10 @@ public class AddressController {
 
         switch (requestCode) {
             case REQUEST_CODE_ADD:
-                new AddressDA(context).add(new Gson().fromJson(String.valueOf(intent.getStringExtra(BoxController.INTENT_BOX)), Address.class));
+                new AddressDA(context).add(new Gson().fromJson(String.valueOf(intent.getStringExtra(AddressController.INTENT_ADDRESS)), Address.class));
+                break;
+            case REQUEST_CODE_EDIT:
+                new AddressDA(context).updateAddress(new Gson().fromJson(String.valueOf(intent.getStringExtra(AddressController.INTENT_ADDRESS)), Address.class));
                 break;
         }
     }

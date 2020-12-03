@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.address.AddAddress">
+    tools:context=".ui.address.AddressForm">
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add New Address"
+        android:text="Title"
         android:textSize="24sp" />
 
     <EditText

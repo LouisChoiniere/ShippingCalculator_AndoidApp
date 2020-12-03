@@ -7,13 +7,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import com.google.gson.Gson;
-import com.louis.shippingcalculator.ui.box.AddBox;
+import com.louis.shippingcalculator.ui.box.BoxForm;
 import com.louis.shippingcalculator.data.BoxDA;
 import com.louis.shippingcalculator.model.Box;
 import com.louis.shippingcalculator.ui.box.InfoBox;
 
 public class BoxController {
+    public static final String REQUEST_CODE = "requestCode";
     public static final int REQUEST_CODE_ADD = 11;
+    public static final int REQUEST_CODE_EDIT = 12;
 
     public static final String INTENT_BOX = "Box";
 
@@ -27,7 +29,8 @@ public class BoxController {
 
     // Launch add activity for result
     public static void add(Context context) {
-        Intent intent = new Intent(context, AddBox.class);
+        Intent intent = new Intent(context, BoxForm.class);
+        intent.putExtra(REQUEST_CODE, String.valueOf(REQUEST_CODE_ADD));
         ((Activity) context).startActivityForResult(intent, REQUEST_CODE_ADD);
     }
 
@@ -47,16 +50,13 @@ public class BoxController {
     }
 
 
-    public static void launchEdit(Context context, Box box) {
-
-    }
-
     public static void edit(Context context, Box box) {
-        BoxDA boxDA = new BoxDA(context);
-
-        // ToDo implement edit box
-//        boxDA.editBox(box);
+        Intent intent = new Intent(context, BoxForm.class);
+        intent.putExtra(REQUEST_CODE, String.valueOf(REQUEST_CODE_EDIT));
+        intent.putExtra(INTENT_BOX, new Gson().toJson(box));
+        ((Activity) context).startActivityForResult(intent, REQUEST_CODE_EDIT);
     }
+
 
     // result of start activity for result
     public static void activityResult(Context context, int requestCode, int resultCode, Intent intent) {
@@ -64,6 +64,9 @@ public class BoxController {
         switch (requestCode) {
             case REQUEST_CODE_ADD:
                 new BoxDA(context).add(new Gson().fromJson(String.valueOf(intent.getStringExtra(BoxController.INTENT_BOX)), Box.class));
+                break;
+            case REQUEST_CODE_EDIT:
+                new BoxDA(context).updateBox(new Gson().fromJson(String.valueOf(intent.getStringExtra(BoxController.INTENT_BOX)), Box.class));
                 break;
         }
     }

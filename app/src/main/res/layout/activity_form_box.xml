@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.box.AddBox">
+    tools:context=".ui.box.BoxForm">
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add New Box"
+        android:text="Title"
         android:textSize="24sp" />
 
     <EditText
@@ -24,19 +25,22 @@
         android:id="@+id/width"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Width" />
+        android:hint="Width"
+        android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/height"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Height" />
+        android:hint="Height"
+        android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/depth"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Depth" />
+        android:hint="Depth"
+        android:inputType="numberDecimal" />
 
     <Button
         android:id="@+id/submit"

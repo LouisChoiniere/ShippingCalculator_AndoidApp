@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.louis.shippingcalculator.R;
+import com.louis.shippingcalculator.controller.AddressController;
 import com.louis.shippingcalculator.controller.BoxController;
 import com.louis.shippingcalculator.model.Box;
 
@@ -34,10 +35,7 @@ public class InfoBox extends AppCompatActivity {
         heightTV = findViewById(R.id.height);
         depthTV = findViewById(R.id.depth);
 
-        nameTV.setText(box.getName());
-        widthTV.setText(String.valueOf(box.getWidth()));
-        heightTV.setText(String.valueOf(box.getHeight()));
-        depthTV.setText(String.valueOf(box.getDepth()));
+        updateText();
 
         findViewById(R.id.deleteBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,8 +47,26 @@ public class InfoBox extends AppCompatActivity {
         findViewById(R.id.editBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BoxController.launchEdit(InfoBox.this, box);
+                BoxController.edit(InfoBox.this, box);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
+        if (requestCode == BoxController.REQUEST_CODE_EDIT) {
+            box = new Gson().fromJson(String.valueOf(intent.getStringExtra(BoxController.INTENT_BOX)), Box.class);
+            updateText();
+        }
+
+        BoxController.activityResult(this, requestCode, resultCode, intent);
+        super.onActivityResult(requestCode, resultCode, intent);
+    }
+
+    private void updateText() {
+        nameTV.setText(box.getName());
+        widthTV.setText(String.valueOf(box.getWidth()));
+        heightTV.setText(String.valueOf(box.getHeight()));
+        depthTV.setText(String.valueOf(box.getDepth()));
     }
 }

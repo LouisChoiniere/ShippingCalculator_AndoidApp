@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
 
-
 //        // Add data box
 //        BoxController.add(this, new Box("A2", 10, 15, 16));
 //        BoxController.add(this, new Box("D20", 20, 20, 20));
@@ -69,8 +68,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
-        BoxController.activityResult(this, requestCode, resultCode, intent);
-        AddressController.activityResult(this, requestCode, resultCode, intent);
+        if (resultCode != RESULT_CANCELED) {
+            BoxController.activityResult(this, requestCode, resultCode, intent);
+            AddressController.activityResult(this, requestCode, resultCode, intent);
+        }
+
         super.onActivityResult(requestCode, resultCode, intent);
     }
 }

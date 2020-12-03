@@ -55,4 +55,24 @@ public class Box {
     public double getDepth() {
         return depth;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setDepth(double depth) {
+        this.depth = depth;
+    }
 }

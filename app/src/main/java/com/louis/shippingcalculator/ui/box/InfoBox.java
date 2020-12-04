@@ -54,12 +54,15 @@ public class InfoBox extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
-        if (requestCode == BoxController.REQUEST_CODE_EDIT) {
-            box = new Gson().fromJson(String.valueOf(intent.getStringExtra(BoxController.INTENT_BOX)), Box.class);
-            updateText();
+        if (resultCode != RESULT_CANCELED) {
+            if (requestCode == BoxController.REQUEST_CODE_EDIT) {
+                box = new Gson().fromJson(String.valueOf(intent.getStringExtra(BoxController.INTENT_BOX)), Box.class);
+                updateText();
+            }
+
+            BoxController.activityResult(this, requestCode, resultCode, intent);
         }
 
-        BoxController.activityResult(this, requestCode, resultCode, intent);
         super.onActivityResult(requestCode, resultCode, intent);
     }
 

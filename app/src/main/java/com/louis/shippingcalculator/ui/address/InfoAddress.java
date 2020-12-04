@@ -55,12 +55,15 @@ public class InfoAddress extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
-        if (requestCode == AddressController.REQUEST_CODE_EDIT) {
-            address = new Gson().fromJson(String.valueOf(intent.getStringExtra(AddressController.INTENT_ADDRESS)), Address.class);
-            updateText();
+        if (resultCode != RESULT_CANCELED) {
+            if (requestCode == AddressController.REQUEST_CODE_EDIT) {
+                address = new Gson().fromJson(String.valueOf(intent.getStringExtra(AddressController.INTENT_ADDRESS)), Address.class);
+                updateText();
+            }
+
+            AddressController.activityResult(this, requestCode, resultCode, intent);
         }
 
-        AddressController.activityResult(this, requestCode, resultCode, intent);
         super.onActivityResult(requestCode, resultCode, intent);
     }
 

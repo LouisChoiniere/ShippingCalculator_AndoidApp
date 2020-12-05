@@ -1,35 +1,46 @@
 package com.louis.shippingcalculator.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.louis.shippingcalculator.R;
+import com.louis.shippingcalculator.controller.PriceCalculatorController;
+import com.louis.shippingcalculator.data.AddressDA;
+import com.louis.shippingcalculator.data.BoxDA;
+import com.louis.shippingcalculator.model.PriceCalculator;
+import com.louis.shippingcalculator.util.AsyncResponse;
 
 public class HomeFragment extends Fragment {
+    private String TAG = "HomeFragment";
 
-    private HomeViewModel homeViewModel;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        AddressDA addressDA = new AddressDA(getContext());
+        BoxDA boxDA = new BoxDA(getContext());
+
+        PriceCalculator priceCalculator = new PriceCalculator(addressDA.getAddress(1), addressDA.getAddress(2), boxDA.getBox(1), 1);
+
+        new PriceCalculatorController(getContext()).getShippingPrice(priceCalculator, new AsyncResponse() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onFinished(Object object) {
+                Log.d(TAG, "onFinished: " + object.getClass().toString());
             }
         });
-        return root;
+
+        return view;
     }
 }

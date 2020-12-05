@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
 
-import com.louis.shippingcalculator.model.Address;
 import com.louis.shippingcalculator.model.Box;
 import com.louis.shippingcalculator.util.DbUtil;
 
@@ -36,7 +35,7 @@ public class BoxDA extends DatabaseHandler {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(DbUtil.Box.TABLE_NAME,
-                new String[]{DbUtil.Box.KEY_ID, DbUtil.Box.KEY_WIDTH, DbUtil.Box.KEY_HEIGHT, DbUtil.Box.KEY_DEPTH},
+                new String[]{DbUtil.Box.KEY_ID, DbUtil.Box.KEY_NAME, DbUtil.Box.KEY_WIDTH, DbUtil.Box.KEY_HEIGHT, DbUtil.Box.KEY_DEPTH},
                 DbUtil.Box.KEY_ID + "=?",
                 new String[]{String.valueOf(id)},
                 null, null, null);

@@ -2,16 +2,6 @@ package com.louis.shippingcalculator;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.louis.shippingcalculator.controller.AddressController;
-import com.louis.shippingcalculator.controller.BoxController;
-import com.louis.shippingcalculator.data.AddressDA;
-import com.louis.shippingcalculator.data.BoxDA;
-import com.louis.shippingcalculator.data.DatabaseHandler;
-import com.louis.shippingcalculator.model.Address;
-import com.louis.shippingcalculator.model.Box;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +10,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import java.util.List;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.louis.shippingcalculator.controller.AddressController;
+import com.louis.shippingcalculator.controller.BoxController;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "myDebug";
@@ -47,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 //        BoxController.add(this, new Box("D20", 20, 20, 20));
 //        BoxController.add(this, new Box("D5", 5, 5, 5));
 //
-//        for (Box box : boxDA.getAllBox()) {
+//        for (Box box : new BoxDA(this).getAllBox()) {
 //            Log.d(TAG, box.toString());
 //        }
 //

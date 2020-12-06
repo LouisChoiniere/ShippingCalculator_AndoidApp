@@ -10,6 +10,13 @@ public class Box {
     public Box() {
     }
 
+    public Box(Box box) {
+        this.name = box.name;
+        this.width = box.width;
+        this.height = box.height;
+        this.depth = box.depth;
+    }
+
     public Box(String name, double width, double height, double depth) {
         this.name = name;
         this.width = width;

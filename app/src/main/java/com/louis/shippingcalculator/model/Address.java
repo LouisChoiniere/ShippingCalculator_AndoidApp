@@ -12,6 +12,15 @@ public class Address {
     public Address() {
     }
 
+    public Address(Address address) {
+        this.name = address.name;
+        this.address = address.address;
+        this.city = address.city;
+        this.province = address.province;
+        this.postalCode = address.postalCode;
+        this.country = address.country;
+    }
+
     public Address(String name, String address, String city, String province, String postalCode, String country) {
         this.name = name;
         this.address = address;

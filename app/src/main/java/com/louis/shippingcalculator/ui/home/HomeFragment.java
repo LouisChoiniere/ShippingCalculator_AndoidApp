@@ -1,5 +1,6 @@
 package com.louis.shippingcalculator.ui.home;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.google.gson.Gson;
 import com.louis.shippingcalculator.R;
 import com.louis.shippingcalculator.controller.PriceCalculatorController;
 import com.louis.shippingcalculator.data.AddressDA;
@@ -25,6 +27,7 @@ import com.louis.shippingcalculator.model.Address;
 import com.louis.shippingcalculator.model.Box;
 import com.louis.shippingcalculator.model.PriceCalculator;
 import com.louis.shippingcalculator.util.AsyncResponse;
+import com.louis.shippingcalculator.util.ResultActivity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -122,7 +125,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public void onClick(View view) {
 
-
         if (this.from == null || this.to == null || this.box == null || weightET.getText().toString().isEmpty())
             return;
 
@@ -132,6 +134,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             @Override
             public void onFinished(Object object) {
                 Log.d(TAG, "onFinished: " + object.getClass().toString());
+
+                Intent intent = new Intent(getContext(), ResultActivity.class);
+                intent.putExtra("result", new Gson().toJson(object));
+                getContext().startActivity(intent);
             }
         });
     }

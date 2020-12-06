@@ -13,8 +13,8 @@ public class PriceQuote {
         this.price = price;
     }
 
-    public String diplay() {
-        return name + ": " + price;
+    public String display() {
+        return name + ": " + price + "$";
     }
 
     @Override

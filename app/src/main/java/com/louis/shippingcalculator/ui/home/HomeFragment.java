@@ -123,7 +123,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     public void onClick(View view) {
 
 
-
         if (this.from == null || this.to == null || this.box == null || weightET.getText().toString().isEmpty())
             return;
 

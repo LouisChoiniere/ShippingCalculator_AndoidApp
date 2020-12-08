@@ -40,16 +40,18 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Box box = boxList.get(position);
+
         holder.nameTV.setText(boxList.get(position).getName());
-        holder.widthTV.setText(Double.toString(boxList.get(position).getWidth()));
-        holder.heightTV.setText(Double.toString(boxList.get(position).getHeight()));
-        holder.depthTV.setText(Double.toString(boxList.get(position).getDepth()));
+        holder.widthTV.setText("Width: " + Double.toString(box.getWidth()));
+        holder.heightTV.setText("Height: " + Double.toString(box.getHeight()));
+        holder.depthTV.setText("Depth: " + Double.toString(box.getDepth()));
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: " + boxList.get(position).toString());
-                BoxController.showInfo(context, boxList.get(position));
+                Log.d(TAG, "onClick: " + box.toString());
+                BoxController.showInfo(context, box);
             }
         });
     }

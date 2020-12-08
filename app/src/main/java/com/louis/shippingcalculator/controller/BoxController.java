@@ -7,9 +7,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import com.google.gson.Gson;
-import com.louis.shippingcalculator.ui.box.BoxForm;
 import com.louis.shippingcalculator.data.BoxDA;
 import com.louis.shippingcalculator.model.Box;
+import com.louis.shippingcalculator.ui.box.BoxForm;
 import com.louis.shippingcalculator.ui.box.InfoBox;
 
 public class BoxController {
@@ -36,6 +36,8 @@ public class BoxController {
 
     // Show prompt and delete box
     public static void delete(Context context, Box box) {
+//        ((Activity)context).getFragmentManager().findFragmentById(R.id.nav_host_fragment);
+
         new AlertDialog.Builder(context)
                 .setTitle("Delete")
                 .setMessage("Do you really want to this address?")

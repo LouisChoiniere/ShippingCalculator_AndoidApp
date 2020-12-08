@@ -1,5 +1,8 @@
 package com.louis.shippingcalculator.ui.home;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,6 +38,8 @@ import java.util.stream.Collectors;
 public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     private String TAG = "HomeFragment";
 
+    private Context context;
+
     private Spinner fromSpinner;
     private Spinner toSpinner;
     private Spinner boxSpinner;
@@ -49,6 +54,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        context = getContext();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -125,8 +132,9 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public void onClick(View view) {
 
+        try {
         if (this.from == null || this.to == null || this.box == null || weightET.getText().toString().isEmpty())
-            return;
+            throw new NoSuchFieldException("Missing field");
 
         PriceCalculator priceCalculator = new PriceCalculator(this.from, this.to, this.box, 1);
 
@@ -140,5 +148,24 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 getContext().startActivity(intent);
             }
         });
+        } catch (NoSuchFieldException e) {
+            new AlertDialog.Builder(context)
+                    .setTitle("Error")
+                    .setMessage("Make sure no fields are empty")
+                    .setIcon(android.R.drawable.stat_sys_warning)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                        }
+                    }).show();
+        } catch (Exception e) {
+            new AlertDialog.Builder(context)
+                    .setTitle("Error")
+                    .setMessage("An error occurred while adding the box")
+                    .setIcon(android.R.drawable.stat_sys_warning)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                        }
+                    }).show();
+        }
     }
 }

@@ -1,12 +1,15 @@
 package com.louis.shippingcalculator.ui.address;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.louis.shippingcalculator.R;
@@ -14,6 +17,8 @@ import com.louis.shippingcalculator.controller.AddressController;
 import com.louis.shippingcalculator.model.Address;
 
 public class AddressForm extends AppCompatActivity {
+
+    Context context = this;
 
     Address address;
 
@@ -61,16 +66,46 @@ public class AddressForm extends AppCompatActivity {
         findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Address newAddress = new Address(nameET.getText().toString(), addressET.getText().toString(), cityET.getText().toString(), provinceET.getText().toString(), postalCodeET.getText().toString(), countryET.getText().toString());
+                try {
+                    if (nameET.getText().toString().isEmpty() ||
+                            addressET.getText().toString().isEmpty() ||
+                            cityET.getText().toString().isEmpty() ||
+                            provinceET.getText().toString().isEmpty() ||
+                            postalCodeET.getText().toString().isEmpty() ||
+                            countryET.getText().toString().isEmpty())
+                        throw new NoSuchFieldException("Missing field");
 
-                if(REQUEST_CODE == AddressController.REQUEST_CODE_EDIT)
-                    newAddress.setId(address.getId());
 
-                Intent intent = getIntent();
-                intent.putExtra(AddressController.INTENT_ADDRESS, new Gson().toJson(newAddress));
+                    Address newAddress = new Address(nameET.getText().toString(), addressET.getText().toString(), cityET.getText().toString(), provinceET.getText().toString(), postalCodeET.getText().toString(), countryET.getText().toString());
 
-                setResult(RESULT_OK, intent);
-                finish();
+                    if (REQUEST_CODE == AddressController.REQUEST_CODE_EDIT)
+                        newAddress.setId(address.getId());
+
+                    Intent intent = getIntent();
+                    intent.putExtra(AddressController.INTENT_ADDRESS, new Gson().toJson(newAddress));
+
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } catch (NoSuchFieldException e) {
+                    new AlertDialog.Builder(context)
+                            .setTitle("Error")
+                            .setMessage("Make sure no fields are empty")
+                            .setIcon(android.R.drawable.stat_sys_warning)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                }
+                            }).show();
+                } catch (Exception e) {
+                    new AlertDialog.Builder(context)
+                            .setTitle("Error")
+                            .setMessage("An error occurred while adding the address")
+                            .setIcon(android.R.drawable.stat_sys_warning)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                }
+                            }).show();
+                }
+
             }
         });
     }

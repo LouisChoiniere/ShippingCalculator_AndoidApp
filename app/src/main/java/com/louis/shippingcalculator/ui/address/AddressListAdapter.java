@@ -5,7 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,15 +40,16 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.nameTV.setText(addressList.get(position).getName());
-        holder.addressTV.setText(addressList.get(position).getAddress());
-        holder.postalCodeTV.setText(addressList.get(position).getPostalCode());
+        Address address = addressList.get(position);
+
+        holder.nameTV.setText(address.getName());
+        holder.addressTV.setText(address.getAddress() + " " + address.getCity() + " " + address.getPostalCode());
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: " + addressList.get(position).toString());
-                AddressController.showInfo(context, addressList.get(position));
+                Log.d(TAG, "onClick: " + address.toString());
+                AddressController.showInfo(context, address);
             }
         });
     }
@@ -59,10 +60,9 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        RelativeLayout parentLayout;
+        LinearLayout parentLayout;
         TextView nameTV;
         TextView addressTV;
-        TextView postalCodeTV;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,7 +70,6 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             parentLayout = itemView.findViewById(R.id.parent_layout);
             nameTV = itemView.findViewById(R.id.name);
             addressTV = itemView.findViewById(R.id.address);
-            postalCodeTV = itemView.findViewById(R.id.postalCode);
         }
     }
 }

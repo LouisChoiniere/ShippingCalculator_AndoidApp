@@ -38,7 +38,7 @@ public class BoxController {
     public static void delete(Context context, Box box) {
         new AlertDialog.Builder(context)
                 .setTitle("Delete")
-                .setMessage("Do you really want to this address?")
+                .setMessage("Do you really want to this box?")
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {

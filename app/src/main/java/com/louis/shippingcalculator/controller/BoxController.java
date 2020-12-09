@@ -36,8 +36,6 @@ public class BoxController {
 
     // Show prompt and delete box
     public static void delete(Context context, Box box) {
-//        ((Activity)context).getFragmentManager().findFragmentById(R.id.nav_host_fragment);
-
         new AlertDialog.Builder(context)
                 .setTitle("Delete")
                 .setMessage("Do you really want to this address?")

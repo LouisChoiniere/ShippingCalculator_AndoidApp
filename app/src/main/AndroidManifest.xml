@@ -11,17 +11,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShippingCalculator">
-        <activity android:name=".ui.ResultActivity"></activity>
-        <activity android:name=".ui.address.AddressForm" />
-        <activity android:name=".ui.box.BoxForm" />
-        <activity android:name=".ui.box.InfoBox" />
-        <activity android:name=".ui.address.InfoAddress" />
+        <activity
+            android:name=".ui.ResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.address.AddressForm"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.box.BoxForm"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.box.InfoBox"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.address.InfoAddress"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

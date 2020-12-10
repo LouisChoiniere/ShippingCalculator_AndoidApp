@@ -13,6 +13,10 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.louis.shippingcalculator.controller.AddressController;
 import com.louis.shippingcalculator.controller.BoxController;
+import com.louis.shippingcalculator.data.AddressDA;
+import com.louis.shippingcalculator.data.BoxDA;
+import com.louis.shippingcalculator.model.Address;
+import com.louis.shippingcalculator.model.Box;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "myDebug";
@@ -34,28 +38,20 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
 
-//        // Add data box
-//        BoxController.add(this, new Box("A2", 10, 15, 16));
-//        BoxController.add(this, new Box("D20", 20, 20, 20));
-//        BoxController.add(this, new Box("D5", 5, 5, 5));
-//
-//        for (Box box : new BoxDA(this).getAllBox()) {
-//            Log.d(TAG, box.toString());
-//        }
-//
-//        // Add data address
-//        AddressDA addressDA = new AddressDA(MainActivity.this);
-//
-//        AddressController.add(this, new Address("Louis", "249Street", "Montreal", "Quebec", "J4V 2A8", "Canada"));
-//        AddressController.add(this, new Address("Simon", "1120 Panama", "Brossard", "Quebec", "J4V 2A8", "Canada"));
-//        AddressController.add(this, new Address("Yu Qiao", "1150 Croissant", "Brossard", "Quebec", "J4V 2A8", "Canada"));
-//        AddressController.add(this, new Address("Ryan", "564 Yettus", "Brossard", "Quebec", "J4V 2A8", "Canada"));
-//        AddressController.add(this, new Address("Gabe", "8133 Yeet", "Brossard", "Quebec", "J4V 2A8", "Canada"));
-//
-//        for (Address address : addressDA.getAllAddress()) {
-//            Log.d(TAG, address.toString());
-//        }
+        // Add demo data if there is no addresses and boxes stored in the database
+        AddressDA addressDA = new AddressDA(this);
+        if (addressDA.getAllAddress().size() == 0) {
+            addressDA.add(new Address("Louis", "958 parklane", "Greenfield park", "Quebec", "J4V 1A8", "Canada"));
+            addressDA.add(new Address("Yu Qiao", "1150 Croissant", "Brossard", "Quebec", "J4X 1M9", "Canada"));
+            addressDA.add(new Address("Ryan", "915 Stravinski", "Brossard", "Quebec", "J4X 1W8", "Canada"));
+        }
 
+        BoxDA boxDA = new BoxDA(this);
+        if (boxDA.getAllBox().size() == 0) {
+            boxDA.add(new Box("A2", 10, 15, 16));
+            boxDA.add(new Box("D20", 20, 20, 20));
+            boxDA.add(new Box("D5", 5, 5, 5));
+        }
     }
 
     @Override

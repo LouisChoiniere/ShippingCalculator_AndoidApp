@@ -30,7 +30,7 @@ import com.louis.shippingcalculator.model.Address;
 import com.louis.shippingcalculator.model.Box;
 import com.louis.shippingcalculator.model.PriceCalculator;
 import com.louis.shippingcalculator.util.AsyncResponse;
-import com.louis.shippingcalculator.util.ResultActivity;
+import com.louis.shippingcalculator.ui.ResultActivity;
 
 import java.util.List;
 import java.util.stream.Collectors;

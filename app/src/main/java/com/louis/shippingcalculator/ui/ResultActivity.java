@@ -1,4 +1,4 @@
-package com.louis.shippingcalculator.util;
+package com.louis.shippingcalculator.ui;
 
 import android.os.Bundle;
 import android.view.View;

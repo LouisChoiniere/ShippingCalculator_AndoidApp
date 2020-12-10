@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShippingCalculator">
-        <activity android:name=".util.ResultActivity"></activity>
+        <activity android:name=".ui.ResultActivity"></activity>
         <activity android:name=".ui.address.AddressForm" />
         <activity android:name=".ui.box.BoxForm" />
         <activity android:name=".ui.box.InfoBox" />

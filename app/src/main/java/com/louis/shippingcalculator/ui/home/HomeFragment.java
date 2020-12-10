@@ -133,21 +133,21 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     public void onClick(View view) {
 
         try {
-        if (this.from == null || this.to == null || this.box == null || weightET.getText().toString().isEmpty())
-            throw new NoSuchFieldException("Missing field");
+            if (this.from == null || this.to == null || this.box == null || weightET.getText().toString().isEmpty())
+                throw new NoSuchFieldException("Missing field");
 
-        PriceCalculator priceCalculator = new PriceCalculator(this.from, this.to, this.box, 1);
+            PriceCalculator priceCalculator = new PriceCalculator(this.from, this.to, this.box, 1);
 
-        new PriceCalculatorController(getContext()).getShippingPrice(priceCalculator, new AsyncResponse() {
-            @Override
-            public void onFinished(Object object) {
-                Log.d(TAG, "onFinished: " + object.getClass().toString());
+            new PriceCalculatorController(getContext()).getShippingPrice(priceCalculator, new AsyncResponse() {
+                @Override
+                public void onFinished(Object object) {
+                    Log.d(TAG, "onFinished: " + object.getClass().toString());
 
-                Intent intent = new Intent(getContext(), ResultActivity.class);
-                intent.putExtra("result", new Gson().toJson(object));
-                getContext().startActivity(intent);
-            }
-        });
+                    Intent intent = new Intent(getContext(), ResultActivity.class);
+                    intent.putExtra("result", new Gson().toJson(object));
+                    getContext().startActivity(intent);
+                }
+            });
         } catch (NoSuchFieldException e) {
             new AlertDialog.Builder(context)
                     .setTitle("Error")
@@ -160,7 +160,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         } catch (Exception e) {
             new AlertDialog.Builder(context)
                     .setTitle("Error")
-                    .setMessage("An error occurred while adding the box")
+                    .setMessage("An error occurred")
                     .setIcon(android.R.drawable.stat_sys_warning)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {

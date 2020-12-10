@@ -1,7 +1,8 @@
 package com.louis.shippingcalculator.controller;
 
+import android.app.AlertDialog;
 import android.content.Context;
-import android.util.Log;
+import android.content.DialogInterface;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -79,7 +80,14 @@ public class PriceCalculatorController {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d(TAG, "onErrorResponse: " + error);
+                        new AlertDialog.Builder(context)
+                                .setTitle("Error")
+                                .setMessage("An error occurred while calculating the price")
+                                .setIcon(android.R.drawable.stat_sys_warning)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                    }
+                                }).show();
                     }
                 }
         ) {
